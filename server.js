@@ -9,6 +9,18 @@ app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
 
+var developer = [
+	{firstName: 'a' , lastName:'a1'},
+	{firstName: 'b' , lastName:'b1'},
+	{firstName: 'c' , lastName:'c1'},
+	{firstName: 'd' , lastName:'d1'},
+	{firstName: 'e' , lastName:'e1'}
+];
+
+app.get('/api/developer', function(req, res){
+	res.json(developer);
+});
+
 const TwitchJS = require('twitch-js');
 
     // Setup the client with your configuration; more details here:
@@ -40,4 +52,4 @@ const TwitchJS = require('twitch-js');
     });
 
     // Finally, connect to the channel
-    client.connect();
+  //  client.connect();
