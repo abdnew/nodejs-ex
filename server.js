@@ -9,8 +9,8 @@ app.use(morgan('combined'))
 
 //app.use(express.static(__dirname + '/public'));
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
-    ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000,
+    ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
     mongoURLLabel = "";
 
@@ -77,7 +77,7 @@ var initDb = function(callback) {
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
-  if (!db) {
+ /* if (!db) {
     initDb(function(err){});
   }
   if (db) {
@@ -92,7 +92,8 @@ app.get('/', function (req, res) {
     });
   } else {
     res.render('index.html', { pageCountMessage : null});
-  }
+  }*/
+  res.send('Hello World')
 });
 
 app.get('/pagecount', function (req, res) {
