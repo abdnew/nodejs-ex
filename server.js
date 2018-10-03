@@ -91,12 +91,14 @@ app.get('/', function (req, res) {
    //   res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
   } else {
-	  res.send('Hello World')
-   // res.render('index.html', { pageCountMessage : null});
+//	  res.send('Hello World')
+    res.render('index.html', { pageCountMessage : null});
   }
   
 });
-
+app.get('/hello', function (req, res) {
+	res.send('Hello World')
+});
 app.get('/pagecount', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
