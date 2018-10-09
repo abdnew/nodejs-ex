@@ -1,3 +1,14 @@
 /node_modules/
+/reactapp/
+/images/
+/libs/
+/scripts/chatWorker.js
+/scripts/giftjs.js
+/scripts/main.js
+/scripts/poll.js
+/scripts/socketio.js
+/sounds/
 npm-debug.log
 app.js
+index.html
+sub meter.js

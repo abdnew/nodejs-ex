@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<title>Meter Logs</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<style>
+			table {
+				border-collapse: collapse;
+				margin: auto;
+				width: 100%;
+				padding: 5px;
+				overflow-x:auto;
+				font-family:verdana;
+			}
+			th{
+				font-size: 130%;
+				height: 50px;
+				background-color: #5F33CC;
+    		color: white;
+			}
+			table, th, td {
+				padding: 10px;
+				text-align: center;
+			}
+			tr:hover {background-color: #f5f5f5;}
+			tr:nth-child(even) {background-color: #E7E7E7;}
+			#msg {
+				width: 60%;
+				text-align: left;
+			}
+		</style>
+	</head>
+		<body>
+			<table id='tbllogs'>
+				<tr id='tbltitle'>
+					<th>Time</th>
+					<th>User Name</th>
+					<th>Action</th>
+					<th>Ammount</th>
+					<th>Message</th>
+				</tr>
+			</table>
+			<script>
+				var socket=io.connect('127.0.0.1:3000');
+				socket.on('logs',function(data){
+				console.log(data[0]);
+				  for (var i=0;i<data[0].length;i++){
+				    var tr=`<tr><td>${getHoursx(data[0][i].time)}</td><td>${data[0][i].display_name}</td><td>${getTypex(data[0][i])}</td><td>${data[0][i].ammount}</td><td id='msg'>${data[0][i].message}</td></tr>`;
+				    $("#tbllogs").append(tr);
+				  }
+				});
+				socket.on('update',function(data){
+				  console.log(data);
+				  var tr= `<tr><td>${getHoursx(data.time)}</td><td>${data.display_name}</td><td>${getTypex(data)}</td><td>${data.ammount}</td><td id='msg'>${data.message}</td></tr>`;
+				  $(tr).insertAfter('#tbltitle');
+				});
+				function getHoursx(datez){
+					var datex= new Date(datez);
+					var rdate= `${datex.getHours()}:${datex.getMinutes()}:${datex.getSeconds()}`
+					return (rdate);
+				}
+				function getTypex(data){
+					var typex=data.type;
+					if (typex!='Cheer'){
+						switch (data.tier) {
+							case '1000':typex+=' | '+'Tier 1';	break;
+							case '2000':typex+=' | '+'Tier 2';	break;
+							case '3000':typex+=' | '+'Tier 3';	break;
+							case 'Prime':typex+=' | '+'Prime';	break;
+							default:break;
+						}
+						return typex;
+					}
+				}
+			</script>
+		</body>
+</html>
