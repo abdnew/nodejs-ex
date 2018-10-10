@@ -22,12 +22,17 @@ var connections_id=[];
 Object.assign=require('object-assign')
 //app.use('/aaa',express.static(__dirname));
 
-
+app.get('/', function (req, res) {
+    res.render('index.html', { pageCountMessage : null});
+});
 app.get('/logs', function(req, res) {
    console.log('Someone Asked For Logs');
    res.sendFile(path.join(__dirname, './public', '/logs.html'));
 
 //	res.json(logs[0]);
+});
+app.get('/logs', function(req, res) {
+  res.send('THIS IS WORKING');
 });
 
 var con_server = app.listen(port, ip);
