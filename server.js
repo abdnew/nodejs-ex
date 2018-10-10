@@ -24,7 +24,9 @@ Object.assign=require('object-assign')
 
 
 app.get('/logs', function(req, res) {
-   res.sendFile(path.join(__dirname+'/logs.html'));
+   console.log('Someone Asked For Logs');
+   res.sendFile(path.join(__dirname, './public', '/logs.html'));
+
 //	res.json(logs[0]);
 });
 
